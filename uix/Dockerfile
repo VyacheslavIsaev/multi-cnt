@@ -1,7 +1,7 @@
 #Build container
 FROM node:alpine
 
-WORKDIR /usr/app_src/
+WORKDIR /app/
 
 COPY package*.json ./
 RUN npm install
@@ -10,5 +10,7 @@ RUN npm run build
 
 # Deploy container
 FROM nginx:alpine
-EXPOSE 80
-COPY --from=0 /usr/app_src/build /usr/share/nginx/html
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=0 /app/build /usr/share/nginx/html
+
