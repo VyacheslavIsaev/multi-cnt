@@ -1,7 +1,6 @@
 version: '3'
 services:
     nginx:
-        restart: always
         build:
             dockerfile: Dockerfile.dev
             context: ./nginx
@@ -14,8 +13,6 @@ services:
             - PGDATA=/var/lib/postgresql/data/pgdata
     redis:
         image: 'redis:latest'
-    nginx:
-        image: 'nginx:latest'
     api:
         build: 
             dockerfile: Dockerfile.dev
