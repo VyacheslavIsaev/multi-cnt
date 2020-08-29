@@ -10,7 +10,7 @@ script:
     - docker build -t visaev/mcnt-api ./api
     - docker build -t visaev/mcnt-nginx ./nginx
     - docker build -t visaev/mcnt-worker ./worker
-    - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID"
+    - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push visaev/mcnt-uix
     - docker push visaev/mcnt-api
     - docker push visaev/mcnt-nginx
