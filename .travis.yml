@@ -6,12 +6,12 @@ services:
 
 script:
     #after_success:
-    - docker build -t visaev/mcnt-uix ./uix
-    - docker build -t visaev/mcnt-api ./api
-    - docker build -t visaev/mcnt-nginx ./nginx
-    - docker build -t visaev/mcnt-worker ./worker
+    - docker build -t $DOCKER_ID/mcnt-uix ./uix
+    - docker build -t $DOCKER_ID/mcnt-api ./api
+    - docker build -t $DOCKER_ID/mcnt-nginx ./nginx
+    - docker build -t $DOCKER_ID/mcnt-worker ./worker
     - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push visaev/mcnt-uix
-    - docker push visaev/mcnt-api
-    - docker push visaev/mcnt-nginx
-    - docker push visaev/mcnt-worker
+    - docker push $DOCKER_ID/mcnt-uix
+    - docker push $DOCKER_ID/mcnt-api
+    - docker push $DOCKER_ID/mcnt-nginx
+    - docker push $DOCKER_ID/mcnt-worker
