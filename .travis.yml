@@ -1,0 +1,17 @@
+sudo: required
+services:
+    - docker
+
+#before_install:
+
+script:
+    #after_success:
+    - docker build -t visaev/mcnt-uix ./uix
+    - docker build -t visaev/mcnt-api ./api
+    - docker build -t visaev/mcnt-nginx ./nginx
+    - docker build -t visaev/mcnt-worker ./worker
+    - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID"
+    - docker push visaev/mcnt-uix
+    - docker push visaev/mcnt-api
+    - docker push visaev/mcnt-nginx
+    - docker push visaev/mcnt-worker
