@@ -21,9 +21,6 @@ const pgClient = new Pool({
 pgClient.on('error', () => console.log('Lost PG connection!'));
 
 const sql = require('./sql');
-pgClient
-    .query(sql.create_table)
-    .catch(err => console.log(err) );
 
 // Redis Client Setup
 const redis = require('redis');
@@ -41,13 +38,16 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/values/all', async(req, resp)=>{
+    pgClient
+        .query(sql.create_table)
+        .catch(err => console.log(err) );
     const values = await pgClient.query(sql.values);
     resp.send(values.rows);
 });
 
 app.get('/values/current', async(req, resp)=>{
     redisClient.hgetall('values', (err, values)=>{
-        res.send(values);
+        resp.send(values);
     });
 });
 
@@ -60,8 +60,11 @@ app.post('/values', async (req, resp)=>{
     redisClient.hset('values', index, 'Nothing yet!');
     redisPublisher.publish('insert', index);
 
+    pgClient
+        .query(sql.create_table)
+        .catch(err => console.log(err) );
     pgClient.query(sql.insert, [index]);
-    res.send({working: true});
+    resp.send({working: true});
 });
 
 app.listen(5000, err=>{
