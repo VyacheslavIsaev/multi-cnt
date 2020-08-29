@@ -15,3 +15,15 @@ script:
     - docker push $DOCKER_ID/mcnt-api
     - docker push $DOCKER_ID/mcnt-nginx
     - docker push $DOCKER_ID/mcnt-worker
+
+deploy:
+    provider: elasticbeanstalk
+    region: us-east-2
+    app: mcnt
+    env: Mcnt-env
+    bucket_name: elasticbeanstalk-us-east-2-015560362832
+    bucket_path: mcnt
+    on:
+        branch: master    
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_KEY

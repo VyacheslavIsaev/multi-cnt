@@ -1,0 +1,40 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions":[
+        {
+            "name": "nginx",
+            "image": "slavaisaev/mcnt-nginx",
+            "hostname": "uix",
+            "essential": true,
+            "memory": 128,
+            "links": ["api", "uix"],
+            "portMappings":[
+                 {
+                     "hostPort": 80,
+                     "containerPort": 80
+                 }
+            ]
+        },
+        {
+            "name": "uix",
+            "image": "slavaisaev/mcnt-uix",
+            "hostname": "uix",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "api",
+            "image": "slavaisaev/mcnt-api",
+            "hostname": "api",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "worker",
+            "image": "slavaisaev/mcnt-worker",
+            "hostname": "worker",
+            "memory": 128,
+            "essential": false
+        }
+    ]
+}
