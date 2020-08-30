@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: uix-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: uix
+    template:
+        metadata:
+            labels:
+                component: uix
+        spec:
+            containers:
+                - name: uix
+                  image: slavaisaev/mcnt-uix
+                  ports:
+                    - containerPort: 3000
+
