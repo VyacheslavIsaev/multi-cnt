@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: uix-pod
+    labels:
+        component: uix
+spec:
+    containers:
+        - name: uix
+          image: slavaisaev/mcnt-uix
+          ports:
+            - containerPort: 3000
