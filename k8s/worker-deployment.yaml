@@ -15,4 +15,3 @@ spec:
             containers:
                 - name: worker
                   image: slavaisaev/mcnt-worker
-                  
